@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html name="html" lang="en">
+    <script>
+        function storage(x) {
+           let item = document.createTextNode(document.querySelector("#item_input").value);
+           let amount = document.createTextNode(document.querySelector("#amount_input").value);
+
+           let itemElement = document.createElement("td");
+           let amountElement = document.createElement("td");
+           let fatherElement = document.createElement("tr");
+           fatherElement.className = "remove"
+
+           itemElement.appendChild(item);
+           amountElement.appendChild(amount);
+
+           fatherElement.appendChild(itemElement);
+           fatherElement.appendChild(amountElement);
+
+           let collection = document.querySelector("#table");
+           collection.appendChild(fatherElement);
+
+           return false;
+        };
+
+        function reset() {
+            document.querySelectorAll(".remove").forEach(i => i.remove());
+
+            return false;
+        }
+
+        function add() {
+           let item = document.createTextNode(document.querySelector("#itemName").value);
+           let amount = document.createTextNode(document.querySelector("#itemAmount").value);
+
+           let itemElement = document.createElement("td");
+           let amountElement = document.createElement("td");
+           let fatherElement = document.createElement("tr");
+           fatherElement.className = "tr"
+
+           itemElement.appendChild(item);
+           amountElement.appendChild(amount);
+
+           fatherElement.appendChild(itemElement);
+           fatherElement.appendChild(amountElement);
+
+           let collection = document.querySelector(".table2");
+           collection.appendChild(fatherElement);
+
+           return false;
+        }
+
+        function recipe() {
+            let title = document.createTextNode(`${document.querySelector("#cap").value}: ${document.querySelector("#servingAmount").value}`);
+            let table = document.querySelector(".table2").cloneNode(true);
+            let fatherElement = document.querySelector("#recipes");
+            let recipe = document.createElement("section");
+
+            let titleElement = document.createElement("h2");
+            titleElement.appendChild(title);
+
+            recipe.appendChild(titleElement);
+            recipe.appendChild(table);
+
+            fatherElement.appendChild(recipe);
+
+            recipe.setAttribute("onclick", `return calendar()`);
+            console.log(recipe);
+
+            return false;
+        }
+
+        function calendar(recipe) {
+            console.log("ok");
+            for(let i = 1; i < 22; i++) {
+                let meal = document.querySelector(`#meal-${i}`);
+                if(meal.innerHTML) {
+                    console.log("meow");
+                    continue;
+                }
+                else {
+                    meal.appendChild(recipe);
+                    console.log("woof");
+                    break;
+                };
+            };
+
+            return false;
+        }
+
+    </script>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="" />
+        <title></title>
+        <link rel="stylesheet" href="css" />
+    </head>
+    <body name="body">
+        <script type="text/javascript" src="javascript"></script>
+        <header>
+            <h1>A Meal Plan</h1>
+            <p><i>Made By Lev Shevchenko</i></p>
+        </header>
+        <main name="main">
+            <section id="storage-form" name="first-section">
+                <form name="form">
+                <fieldset name="fieldset">
+                    <p>What do you have?</p>
+                    <input type="text" id="item_input" name="item" required /><br>
+                    <p>How much of that item do you have?</p>
+                    <input type="number" id="amount_input" min="1" name="amount" required /><br>
+                    <input type="submit" value="Submit"  onclick="return storage()" />
+                </fieldset>
+                </form>
+            </section>
+            <section id="storage">
+                <table id="table">
+                    <caption>Inventory</caption>
+                    <tr>
+                        <th>Item</th>
+                        <th>Amount</th>
+                    </tr>
+                </table>
+                <input type="button" value="Reset" onclick="return reset()" />
+            </section>
+            <section id="recipeQuiz">
+                <fieldset>
+                    <p>What would you like to cook?</p>
+                    <input type="text" id="cap" required /><br>
+                    <p>Item:</p>
+                    <input type="text" id="itemName" required /><br>
+                    <p>Item Amount:</p>
+                    <input type="number" id="itemAmount" required /><br>
+                    <input type="button" value="Add" onclick="return add()" /><br>
+                    <table class="table2">
+                        <caption>Ingredients</caption>
+                        <tr>
+                            <th>Item</th>
+                            <th>Amount</th>
+                        </tr>
+                    </table>
+                    <p>Serving amount:</p>
+                    <input type="number" id="servingAmount" required /><br>
+                    <input type="submit" value="Submit"  onclick="return recipe()" />
+                </fieldset>
+                <section id="recipes">
+                </section>
+            </section>
+            <section id="calendar">
+                <table>
+                    <tr>
+                        <th>Sunday</th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                        <th>Saturday</th>
+                    </tr>
+                    <tr>
+                        <td>Breakfast<span id="meal-1"></span></td>
+                        <td>Breakfast<span id="meal-4"></span></td>
+                        <td>Breakfast<span id="meal-7"></span></td>
+                        <td>Breakfast<span id="meal-10"></span></td>
+                        <td>Breakfast<span id="meal-13"></span></td>
+                        <td>Breakfast<span id="meal-16"></span></td>
+                        <td>Breakfast<span id="meal-19"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Lunch<span id="meal-2"></span></td>
+                        <td>Lunch<span id="meal-5"></span></td>
+                        <td>Lunch<span id="meal-8"></span></td>
+                        <td>Lunch<span id="meal-11"></span></td>
+                        <td>Lunch<span id="meal-14"></span></td>
+                        <td>Lunch<span id="meal-17"></span></td>
+                        <td>Lunch<span id="meal-20"></span></td>
+                    </tr>
+                    <tr>
+                        <td>Dinner<span id="meal-3"></span></td>
+                        <td>Dinner<span id="meal-6"></span></td>
+                        <td>Dinner<span id="meal-9"></span></td>
+                        <td>Dinner<span id="meal-12"></span></td>
+                        <td>Dinner<span id="meal-15"></span></td>
+                        <td>Dinner<span id="meal-18"></span></td>
+                        <td>Dinner<span id="meal-21"></span></td>
+                    </tr>
+                </table>
+            </section>
+        </main>
+    </body>
+</html>
