@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html name="html" lang="en">
     <script>
-        function storage(x) {
+        function storage() {
            let item = document.createTextNode(document.querySelector("#item_input").value);
            let amount = document.createTextNode(document.querySelector("#amount_input").value);
 
@@ -62,8 +62,8 @@
             recipe.appendChild(table);
 
             fatherElement.appendChild(recipe);
-
-            recipe.setAttribute("onclick", `return calendar()`);
+            
+            recipe.onclick = function () {calendar(recipe.innerHTML)};
             console.log(recipe);
 
             return false;
@@ -71,15 +71,17 @@
 
         function calendar(recipe) {
             console.log("ok");
-            for(let i = 1; i < 22; i++) {
+            console.log(recipe);
+            for (let i = 1; i < 22; i++) {
                 let meal = document.querySelector(`#meal-${i}`);
+                console.log(meal)
                 if(meal.innerHTML) {
                     console.log("meow");
                     continue;
                 }
                 else {
-                    meal.appendChild(recipe);
                     console.log("woof");
+                    meal.innerHTML = recipe;
                     break;
                 };
             };
